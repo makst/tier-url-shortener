@@ -2,14 +2,16 @@ npm-debug.log*
 lib-cov
 coverage
 node_modules/
+lib
 .npm
 .eslintcache
+mongo-volume
 
 # Output of 'npm pack'
 *.tgz
 
 # dotenv environment variables file
-.env
+*.env
 
 .DS_Store
 

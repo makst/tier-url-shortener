@@ -2,13 +2,17 @@ import express from 'express';
 import swaggerTools from 'swagger-tools';
 import yamljs from 'yamljs';
 import logger from '../logger';
+import { setupDb } from '../db';
 import { notFound, internalServerError, backingServiceValidationError } from './middlewares/error';
 import { getErroneousCallsLogger, getSuccessfulCallsLogger } from './middlewares/logging';
 
 const port = process.env.PORT || 3000;
 const app = express();
 
+setupDb();
+
 swaggerTools.initializeMiddleware(yamljs.load(`${__dirname}/swagger.yml`), (middleware) => {
+    console.log('i am here');
     app.use(getErroneousCallsLogger());
     app.use(getSuccessfulCallsLogger());
 
@@ -41,4 +45,3 @@ swaggerTools.initializeMiddleware(yamljs.load(`${__dirname}/swagger.yml`), (midd
     });
 });
 
-export default app;

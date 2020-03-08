@@ -11,14 +11,15 @@ ENV PORT $PORT
 WORKDIR /
 COPY package.json ./package.json
 # install prod node_modules in root dir
-RUN npm install --no-package-lock --only=prod
+RUN npm install --loglevel=error --no-package-lock --only=prod
 
 WORKDIR /www
 COPY package.json ./package.json
 # install dev node_modules in /www dir
-RUN npm install --no-package-lock --only=dev
+RUN npm install --loglevel=error --no-package-lock --only=dev
 
 COPY . ./
+RUN npm run build
 
 CMD [ "npm", "start" ]
 

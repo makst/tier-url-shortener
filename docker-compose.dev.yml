@@ -4,15 +4,22 @@ services:
     api:
         build:
             target: dev
-        environment:
-            - LOG_LEVEL=$LOG_LEVEL
-            - PORT=$PORT
-            - NODE_ENV=$NODE_ENV
+        depends_on:
+            - db
+        env_file:
+            - docker-compose-api.env
         ports:
             - "$PORT:$PORT"
         volumes:
             - .:/www
             - /www/node_modules
+
+    db:
+        image: mongo
+        volumes:
+            - ./mongo-volume:/data/db
+        ports:
+            - "27017:27017"
 
     swagger-editor:
         image: makst/swagger-editor-live-docker
