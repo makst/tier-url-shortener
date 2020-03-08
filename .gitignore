@@ -1,0 +1,15 @@
+npm-debug.log*
+lib-cov
+coverage
+node_modules/
+.npm
+.eslintcache
+
+# Output of 'npm pack'
+*.tgz
+
+# dotenv environment variables file
+.env
+
+.DS_Store
+

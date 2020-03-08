@@ -1,0 +1,40 @@
+{
+  "name": "tier-url-shortener-api",
+  "version": "0.0.1",
+  "description": "API to return shortened URLs",
+  "main": "lib/api/index.js",
+  "scripts": {
+    "start": "node lib/api/index.js",
+    "lint": "eslint --ignore-path .gitignore .",
+    "docker:build:prod": "docker build -t makst/tier-url-shortener-api:prod .",
+    "docker:up": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs --follow",
+    "docker:sh": "docker exec -it tier-url-shortener-api sh"
+  },
+  "keywords": [
+    "API",
+    "tier"
+  ],
+  "author": "Max Tkachenko",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "express": "^4.16.2",
+    "http-status": "^1.0.1",
+    "lodash": "^4.17.5",
+    "morgan": "^1.9.0",
+    "swagger-tools": "^0.10.3",
+    "winston": "^2.4.0",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.18.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "mocha": "^5.0.1",
+    "sinon": "^9.0.0",
+    "supertest": "^3.0.0"
+  }
+}

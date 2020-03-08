@@ -1,0 +1,67 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Tier url shortener
+  description: >-
+    API to return shortened URLs
+  contact:
+    name: Max Tkachenko
+    email: max.and.tkachenko@gmail.com
+# during dev, should point to your local machine
+host: localhost:3000
+# basePath prefixes all resource paths
+basePath: /v1
+schemes:
+  - http
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+# complex objects have schema definitions
+definitions:
+# ----------------------------------
+# success response schemas
+# ----------------------------------
+# ----------------------------------
+# error response schemas
+# ----------------------------------
+  ErrorResponse:
+    required:
+      - status
+      - message
+    properties:
+      status:
+        $ref: "#/definitions/ErrorStatus"
+      message:
+        $ref: "#/definitions/ErrorMessage"
+      code:
+        $ref: "#/definitions/ErrorCode"
+      data:
+        description: >-
+          A generic container for any other information about the
+          error, i.e. the conditions that caused the error, stack
+          traces, etc.
+        type: object
+# ----------------------------------
+# simple object type schemas
+# ----------------------------------
+  SuccessStatus:
+    description: should always be set to "success"
+    type: string
+    enum:
+      - success
+  ErrorStatus:
+    description: should always be set to "error"
+    type: string
+    enum:
+      - error
+  ErrorMessage:
+    description: end-user-readable message, explaining what went wrong
+    type: string
+  ErrorCode:
+    description: numeric code corresponding to the error
+    type: number
+    format: integer

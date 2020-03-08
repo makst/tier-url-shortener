@@ -1,0 +1,8 @@
+version: '3.7'
+
+services:
+    api:
+        build: .
+        image: makst/tier-url-shortener-api
+        container_name: tier-url-shortener-api
+        init: true

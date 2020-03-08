@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+    api:
+        build:
+            target: dev
+        environment:
+            - LOG_LEVEL=$LOG_LEVEL
+            - PORT=$PORT
+            - NODE_ENV=$NODE_ENV
+        ports:
+            - "$PORT:$PORT"
+        volumes:
+            - .:/www
+            - /www/node_modules
+
+    swagger-editor:
+        image: makst/swagger-editor-live-docker
+        environment:
+            - EDITOR_PORT=$SWAGGER_EDITOR_PORT
+        volumes:
+            - ./lib/api/swagger.yml:/swagger.yml
+        ports:
+            - "$SWAGGER_EDITOR_PORT:$SWAGGER_EDITOR_PORT"
