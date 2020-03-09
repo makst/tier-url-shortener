@@ -20,7 +20,7 @@ function backingServiceValidationError(err, req, res, next) { // eslint-disable-
 
 function internalServerError(err, req, res, next) { // eslint-disable-line no-unused-vars
     if (SWAGGER[err.code]) {
-        logger.error('Received an error from swagger tools middleware.', err);
+        logger.error('Received an error from swagger tools middleware.', err.message, err.code, err.results, err.stack);
     } else {
         logger.error(err.message, err);
     }

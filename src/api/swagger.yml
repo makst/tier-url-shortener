@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   version: "0.0.1"
-  title: Tier url shortener
+  title: TIER url shortener
   description: >-
     API to return shortened URLs
   contact:
@@ -44,6 +44,52 @@ paths:
           description: Internal server error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /{shortUrlHash}:
+    x-swagger-router-controller: shortUrls
+    get:
+      description: Redirects to the long URL if there is one
+      operationId: redirect
+      produces:
+        - text/html
+      parameters:
+        - name: shortUrlHash
+          in: path
+          description: short url hash
+          required: true
+          type: string
+          minLength: 6
+          maxLength: 6
+      responses:
+        "301":
+          description: Success
+          schema:
+            type: string
+        "404":
+          description: Not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /stats/{shortUrlHash}:
+    x-swagger-router-controller: shortUrls
+    get:
+      description: Returns visits statistics for specified shortened URL
+      operationId: stats
+      parameters:
+        - name: shortUrlHash
+          in: path
+          description: short url hash
+          required: true
+          type: string
+          minLength: 6
+          maxLength: 6
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/UrlShortenedStatsResponse"
+        "500":
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 # complex objects have schema definitions
 definitions:
 # ----------------------------------
@@ -58,6 +104,15 @@ definitions:
         $ref: "#/definitions/SuccessStatus"
       data:
         $ref: "#/definitions/UrlShortened"
+  UrlShortenedStatsResponse:
+    required:
+      - status
+      - data
+    properties:
+      status:
+        $ref: "#/definitions/SuccessStatus"
+      data:
+        $ref: "#/definitions/UrlShortenedStats"
 # ----------------------------------
 # error response schemas
 # ----------------------------------
@@ -90,6 +145,19 @@ definitions:
         type: string
       longUrl:
         type: string
+
+  UrlShortenedStats:
+    required:
+      - shortUrl
+      - longUrl
+      - visits
+    properties:
+      shortUrl:
+        type: string
+      longUrl:
+        type: string
+      visits:
+        type: number
 
 # ----------------------------------
 # simple object type schemas

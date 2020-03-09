@@ -12,7 +12,6 @@ const app = express();
 setupDb();
 
 swaggerTools.initializeMiddleware(yamljs.load(`${__dirname}/swagger.yml`), (middleware) => {
-    console.log('i am here');
     app.use(getErroneousCallsLogger());
     app.use(getSuccessfulCallsLogger());
 

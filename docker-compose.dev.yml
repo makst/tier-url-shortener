@@ -26,6 +26,6 @@ services:
         environment:
             - EDITOR_PORT=$SWAGGER_EDITOR_PORT
         volumes:
-            - ./lib/api/swagger.yml:/swagger.yml
+            - ./src/api/swagger.yml:/swagger.yml
         ports:
             - "$SWAGGER_EDITOR_PORT:$SWAGGER_EDITOR_PORT"

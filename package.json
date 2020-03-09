@@ -1,5 +1,5 @@
 {
-  "name": "tier-url-shortener-api ",
+  "name": "tier-url-shortener-api",
   "version": "0.0.1",
   "description": "API to return shortened URLs",
   "main": "lib/api/index.js",
@@ -7,6 +7,7 @@
     "start": "node -r dotenv/config lib/api/index.js",
     "build": "babel src --out-dir lib --ignore *test.js --source-maps && cp -a src/api/swagger.yml lib/api",
     "lint": "eslint --ignore-path .gitignore .",
+    "test:api": "mocha -r dotenv/config --require @babel/register test/api.js",
     "docker:build:prod": "docker build -t makst/tier-url-shortener-api:prod .",
     "docker:up": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build",
     "docker:down": "docker-compose down",
